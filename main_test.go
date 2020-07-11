@@ -21,6 +21,6 @@ import (
 )
 
 func TestGCE(t *testing.T) {
-	i := newInstance()
+
 
 }
