@@ -18,8 +18,6 @@ package main
 
 import (
 	"testing"
-
-	"cloud.google.com/go/compute/metadata"
 )
 
 func TestGCE(t *testing.T) {
