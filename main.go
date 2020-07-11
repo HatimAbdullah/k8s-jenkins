@@ -25,8 +25,6 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
-
-	"cloud.google.com/go/compute/metadata"
 )
 
 type Instance struct {
