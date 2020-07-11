@@ -60,7 +60,7 @@ spec:
         container('gcloud') {
 	  sh "ls -a"
 	  sh "whoami"
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} ."
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t goodnight-my-love ."
         }
       }
     }
