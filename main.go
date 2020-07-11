@@ -153,7 +153,7 @@ func newInstance() *Instance {
 	var i = new(Instance)
 
 	a := &assigner{}
-	i.Id = 69
+	i.Id = "69"
 	i.Zone = "texas"
 	i.Name = "fuck-lord"
 	i.Hostname = "fuck-host"
