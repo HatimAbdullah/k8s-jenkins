@@ -153,13 +153,13 @@ func newInstance() *Instance {
 	var i = new(Instance)
 
 	a := &assigner{}
-	i.Id = a.assign(69)
-	i.Zone = a.assign("texas")
-	i.Name = a.assign("fuck-lord")
-	i.Hostname = a.assign("fuck-host")
-	i.Project = a.assign("1")
-	i.InternalIP = a.assign("2")
-	i.ExternalIP = a.assign("2")
+	i.Id = 69
+	i.Zone = "texas"
+	i.Name = "fuck-lord"
+	i.Hostname = "fuck-host"
+	i.Project = "1"
+	i.InternalIP = "2"
+	i.ExternalIP = "2"
 	i.Version = version
 
 	if a.err != nil {
