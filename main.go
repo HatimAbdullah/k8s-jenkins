@@ -151,19 +151,15 @@ func (a *assigner) assign(getVal func() (string, error)) string {
 
 func newInstance() *Instance {
 	var i = new(Instance)
-	if !metadata.OnGCE() {
-		i.Error = "Not running on GCE"
-		return i
-	}
 
 	a := &assigner{}
-	i.Id = a.assign(metadata.InstanceID)
-	i.Zone = a.assign(metadata.Zone)
-	i.Name = a.assign(metadata.InstanceName)
-	i.Hostname = a.assign(metadata.Hostname)
-	i.Project = a.assign(metadata.ProjectID)
-	i.InternalIP = a.assign(metadata.InternalIP)
-	i.ExternalIP = a.assign(metadata.ExternalIP)
+	i.Id = a.assign(69)
+	i.Zone = a.assign("texas")
+	i.Name = a.assign("fuck-lord")
+	i.Hostname = a.assign("fuck-host")
+	i.Project = a.assign("1")
+	i.InternalIP = a.assign("2")
+	i.ExternalIP = a.assign("2")
 	i.Version = version
 
 	if a.err != nil {
