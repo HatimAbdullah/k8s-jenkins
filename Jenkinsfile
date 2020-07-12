@@ -61,7 +61,7 @@ spec:
 	  sh "ls -a ../../"
 	  sh "whoami"
 	  sh "apt update"
-	  sh "apt install docker.io"
+	  sh "apt install -y docker.io"
           sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         }
       }
