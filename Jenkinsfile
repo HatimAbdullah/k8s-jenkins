@@ -58,8 +58,9 @@ spec:
     stage('Build and push image with Container Builder') {
       steps {
         container('gcloud') {
-	  sh "ls -a"
+	  sh "ls -a ../"
 	  sh "whoami"
+	  sh "apt install docker.io"
           sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} ."
         }
       }
