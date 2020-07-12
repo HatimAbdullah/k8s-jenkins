@@ -34,11 +34,7 @@ spec:
     image: gcr.io/cloud-builders/gcloud
     volumeMounts:
     - name: dockersock
-      mountPath: "/var/run/docker.sock"
-    volumes:
-    - name: dockersock
-      hostPath:
-        path: /var/run/docker.sock 
+      mountPath: "/var/run/docker.sock" 
     command:
     - cat
     tty: true
@@ -47,6 +43,11 @@ spec:
     command:
     - cat
     tty: true
+  volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+
 """
 }
   }
