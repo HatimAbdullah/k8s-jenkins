@@ -87,7 +87,7 @@ spec:
           sh("sed -i.bak '#lordblackfish/underground:latest#' ./k8s/canary/*.yaml")
 	  sh "cat ./k8s/canary/*.yaml"
           step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: "420", clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/services', credentialsId: env.JENKINS_CRED, verifyDeployments: false])
-          step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/canary', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
+          step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: "420", clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/canary', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
           sh("echo http://`kubectl --namespace=fishplayground get service/${FE_SVC_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${FE_SVC_NAME}")
         }
       }
