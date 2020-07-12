@@ -69,7 +69,8 @@ spec:
 	  sh "whoami"
 	  sh "apt update"
 	  sh "apt install -y docker.io"
-          sh "PYTHONUNBUFFERED=1 docker build -t ${IMAGE_TAG} ."
+          sh "PYTHONUNBUFFERED=1 docker build -t lordblackfish/underground:latest ."
+	  sh "docker push lordblackfish/underground:latest"
         }
       }
     }
@@ -79,10 +80,12 @@ spec:
       steps {
         container('kubectl') {
           // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#gcr.io/cloud-solutions-images/gceme:1.0.0#${IMAGE_TAG}#' ./k8s/canary/*.yaml")
-          step([$class: 'KubernetesEngineBuilder', namespace:'production', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/services', credentialsId: env.JENKINS_CRED, verifyDeployments: false])
-          step([$class: 'KubernetesEngineBuilder', namespace:'production', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/canary', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
-          sh("echo http://`kubectl --namespace=production get service/${FE_SVC_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${FE_SVC_NAME}")
+	  sh "ls -a"
+	  sh "whoami"
+          sh("sed -i.bak 's#docker pull lordblackfish/underground:latest' ./k8s/canary/*.yaml")
+          step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/services', credentialsId: env.JENKINS_CRED, verifyDeployments: false])
+          step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/canary', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
+          sh("echo http://`kubectl --namespace=fishplayground get service/${FE_SVC_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${FE_SVC_NAME}")
         }
       }
     }
