@@ -71,6 +71,7 @@ spec:
 	  sh "apt update"
 	  sh "apt install -y docker.io"
           sh "PYTHONUNBUFFERED=1 docker build -t lordblackfish/underground:latest ."
+	  sh "docker login -u lordblackfish -p r28RW3E5i4Ex"
 	  sh "docker push lordblackfish/underground:latest"
         }
       }
