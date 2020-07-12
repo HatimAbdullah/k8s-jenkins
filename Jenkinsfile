@@ -84,10 +84,9 @@ spec:
           // Change deployed image in canary to the one we just built
 	  sh "ls -a"
 	  sh "whoami"
-          sh("sed -i.bak '#lordblackfish/underground:latest#' ./k8s/canary/*.yaml")
+          sh("sed -i.bak 's/gcr.io/cloud-solutions-images/gceme:1.0.0/lordblackfish/underground:latest/g' ./k8s/canary/*.yaml")
 	  sh "cat ./k8s/canary/*.yaml"
-          step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: "420", clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/services', credentialsId: env.JENKINS_CRED, verifyDeployments: false])
-          step([$class: 'KubernetesEngineBuilder', namespace:'fishplayground', projectId: "420", clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'k8s/canary', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
+          sh "kubectl apply -f ./k8s/canary/"
           sh("echo http://`kubectl --namespace=fishplayground get service/${FE_SVC_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${FE_SVC_NAME}")
         }
       }
