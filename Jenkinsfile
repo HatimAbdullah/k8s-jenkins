@@ -32,10 +32,13 @@ spec:
     tty: true
   - name: gcloud
     image: gcr.io/cloud-builders/gcloud
+    volumeMounts:
+    - name: dockersock
+      mountPath: "/var/run/docker.sock"
     volumes:
     - name: dockersock
       hostPath:
-        path: /var/run/docker.sock
+        path: /var/run/docker.sock 
     command:
     - cat
     tty: true
