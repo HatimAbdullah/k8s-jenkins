@@ -17,7 +17,10 @@ pipeline {
       inheritFrom 'default'
 }
   }
-	stage('Deploy on kubernetes') {
+	
+  stages {
+	  
+	  stage('Deploy on kubernetes') {
             steps {
                 kubernetesDeploy(
                     kubeconfigId: 'k8s-default-namespace-config-id',
@@ -26,7 +29,7 @@ pipeline {
                 )
 	    }
 	}
-  stages {
+	  
     stage('Test') {
       steps {
         container('golang') {
