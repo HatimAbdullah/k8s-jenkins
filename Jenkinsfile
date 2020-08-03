@@ -17,6 +17,15 @@ pipeline {
       inheritFrom 'default'
 }
   }
+	stage('Deploy on kubernetes') {
+            steps {
+                kubernetesDeploy(
+                    kubeconfigId: 'k8s-default-namespace-config-id',
+                    configs: 'deployment.yml',
+                    enableConfigSubstitution: true
+                )
+	    }
+	}
   stages {
     stage('Test') {
       steps {
